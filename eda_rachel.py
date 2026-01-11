@@ -22,3 +22,21 @@ joined_radar_instance_run_df['datetime'] = pd.to_datetime(joined_radar_instance_
 # Exploring gender
 # more men or women test drivers? 
 print(runs_df.groupby('sex')['run_id'].count())
+px.scatter(joined_radar_instance_run_df,x='leader_accel',y='follower_accel',color='sex',opacity=.2).show()
+px.scatter(joined_radar_instance_run_df,x='leader_vel',y='follower_vel',color='sex',opacity=.2).show()
+
+# follow up q's
+    # observations of velocity and acceleration where the driver was female have a larger spread than those where the driver was male. 
+    # Why?
+    # More observations by women? Was one gender driving in more congested/uncongested traffic?
+
+print(runs_df.groupby('sex')['run_id'].count())
+print(joined_radar_instance_run_df.groupby('sex')['global_instance_id'].count())
+px.histogram(joined_radar_instance_run_df,x='congestion',color='sex').show()
+
+# Answers
+    # while there only 26 runs made by female drivers as opposed to 32 by male drivers,
+    # the total number of radar points created on female-driver runs was female 318679- 
+    # 37,146 more radar points than recorded by men. Women made up over half of the observations 
+    # recorded for congested traffic, while male and female drivers were nearly evenly responsible
+    # for observations in uncongested traffic.
